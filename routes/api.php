@@ -14,9 +14,12 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::middleware('auth:api')->controller(CustomerController::class)->group(function () {
-    Route::get('customers', 'index');
-    Route::post('customer', 'store');
-    Route::get('customer/{id}', 'show');
-    Route::post('customer/{id}', 'update');
-    Route::delete('customer/{id}', 'destroy');
+    Route::post('customerform/gridconfig', [CustomerController::class, 'gridconfig']);
+    Route::post('customerform/formconfig', [CustomerController::class, 'formconfig']);
+    Route::post('customerform/gets', [CustomerController::class, 'gets']);
+    Route::post('customerform/get', [CustomerController::class, 'get']);
+    Route::post('customerform/delete', [CustomerController::class, 'delete']);
+    Route::post('customerform/insert', [CustomerController::class, 'insert']);
+    Route::post('customerform/update', [CustomerController::class, 'update']);
 }); 
+

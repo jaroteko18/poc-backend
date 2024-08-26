@@ -1,0 +1,15 @@
+http://localhost:37000 {
+	#tls internal
+
+	header -server
+	header /v1/* {
+		cache-control "no-cache, no-store, no-transform, must-revalidate, private, max-age=0"
+	}
+
+	reverse_proxy /api/* localhost:8000
+	
+	redir / /web/
+	redir /web /web/
+	reverse_proxy /web/* localhost:36980
+
+}
