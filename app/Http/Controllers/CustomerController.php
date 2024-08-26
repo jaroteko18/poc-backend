@@ -23,13 +23,15 @@ class CustomerController extends Controller
 
     public function gets(Request $request)
     {
+        $customers = Customer::orderBy('id', 'desc');
         $where = $request->Where;
-        $filter = $where['Items'][0]['Value'][0];
-        $customers = Customer::orderBy('id', 'desc')
-        ->where('name', 'like', '%' . $filter . '%')
-        ->orWhere('email', 'like', '%' . $filter . '%')
-        ->get();
-
+        if($where){
+            $filter = $where['Items'][0]['Value'][0];
+            $customers = $customers->where('name', 'like', '%' . $filter . '%')
+            ->orWhere('email', 'like', '%' . $filter . '%');
+        }
+        $customers = $customers->get();
+        
         foreach( $customers as &$row) {
             $row->_id = $row->id;
         }
