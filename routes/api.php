@@ -13,6 +13,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('me', 'me');
 });
 
+Route::post('protect', [AuthController::class, 'protect']);
+Route::post('reveal', [AuthController::class, 'reveal']);
+
 Route::middleware('auth:api')->controller(CustomerController::class)->group(function () {
     Route::post('customerform/gridconfig', [CustomerController::class, 'gridconfig']);
     Route::post('customerform/formconfig', [CustomerController::class, 'formconfig']);

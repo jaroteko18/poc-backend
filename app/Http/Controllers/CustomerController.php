@@ -24,20 +24,24 @@ class CustomerController extends Controller
     public function gets(Request $request)
     {
         $customers = Customer::orderBy('id', 'desc');
+        
         $where = $request->Where;
+        
         if($where){
             $filter = $where['Items'][0]['Value'][0];
             $customers = $customers->where('name', 'like', '%' . $filter . '%')
             ->orWhere('email', 'like', '%' . $filter . '%');
         }
-        $customers = $customers->get();
+
+        $count = $customers->count();
+        $customers = $customers->skip($request->Skip)->take($request->Take)->get();
         
         foreach( $customers as &$row) {
             $row->_id = $row->id;
         }
         
         return response()->json([
-            'count' => count($customers),
+            'count' => $count,
             'data' => $customers,
         ]);
     }

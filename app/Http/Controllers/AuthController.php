@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
   
   
 class AuthController extends Controller
@@ -102,5 +103,15 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
+    }
+
+    public function protect(Request $request)
+    {   
+        return response()->json($request);
+    }
+
+    public function reveal(Request $request)
+    {   
+        return response()->json($request);
     }
 }
