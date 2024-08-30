@@ -55,6 +55,7 @@ class CustomerController extends Controller
     public function insert(Request $request)
     {   
         $validator = Validator::make(request()->all(), [
+            'customer_id' => 'unique:customers',
             'name' => 'required',
             'email' => 'required|email|unique:customers',
         ]);
@@ -64,6 +65,7 @@ class CustomerController extends Controller
         }
         
         $payload = [
+            'customer_id' => $request->customer_id,
             'name' => $request->name,
             'email' => $request->email,
             'mothers_maiden_name' => $request->mothers_maiden_name,
@@ -88,6 +90,7 @@ class CustomerController extends Controller
         ]);
 
         $customer = Customer::find($request->id);
+        $customer->customer_id = $request->customer_id;
         $customer->name = $request->name;
         $customer->email = $request->email;
         $customer->mothers_maiden_name = $request->mothers_maiden_name;
