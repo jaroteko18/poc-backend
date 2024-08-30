@@ -16,13 +16,21 @@ Route::controller(AuthController::class)->group(function () {
 Route::post('protect', [AuthController::class, 'protect']);
 Route::post('reveal', [AuthController::class, 'reveal']);
 
+Route::post('customer/v2/gridconfig', [CustomerController::class, 'gridconfig']);
+Route::post('customer/v2/formconfig', [CustomerController::class, 'formconfig']);
+Route::post('customer/v2/gets', [CustomerController::class, 'gets']);
+Route::post('customer/v2/get', [CustomerController::class, 'get']);
+Route::post('customer/v2/delete', [CustomerController::class, 'delete']);
+Route::post('customer/v2/insert', [CustomerController::class, 'insert']);
+Route::post('customer/v2/update', [CustomerController::class, 'update']);
+
 Route::middleware('auth:api')->controller(CustomerController::class)->group(function () {
-    Route::post('customerform/gridconfig', [CustomerController::class, 'gridconfig']);
-    Route::post('customerform/formconfig', [CustomerController::class, 'formconfig']);
-    Route::post('customerform/gets', [CustomerController::class, 'gets']);
-    Route::post('customerform/get', [CustomerController::class, 'get']);
-    Route::post('customerform/delete', [CustomerController::class, 'delete']);
-    Route::post('customerform/insert', [CustomerController::class, 'insert']);
-    Route::post('customerform/update', [CustomerController::class, 'update']);
+    Route::post('customer/v1/gridconfig', [CustomerController::class, 'gridconfig']);
+    Route::post('customer/v1/formconfig', [CustomerController::class, 'formconfig']);
+    Route::post('customer/v1/gets', [CustomerController::class, 'gets']);
+    Route::post('customer/v1/get', [CustomerController::class, 'get']);
+    Route::post('customer/v1/delete', [CustomerController::class, 'delete']);
+    Route::post('customer/v1/insert', [CustomerController::class, 'insert']);
+    Route::post('customer/v1/update', [CustomerController::class, 'update']);
 }); 
 
